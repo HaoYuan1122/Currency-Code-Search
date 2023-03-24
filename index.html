@@ -27,7 +27,11 @@
             border-color: #444444;
             color: #ffffff;
         }
-
+        #mode-toggle{
+            position:absolute;
+            top:6%;
+            right:23%
+        }
 	</style>
 </head>
 <body>
@@ -35,7 +39,7 @@
 		<h1>Currency Code List</h1>
 		<button type="button" class="btn btn-primary mt-3" id="mode-toggle">Light Mode On</button>
 		<div class="form-group mt-3">
-			<label for="search-input">Search for a currency:</label>
+			<label for="search-input" class="mb-3">Search for a currency:</label>
 			<input type="text" class="form-control" id="search-input" placeholder="Enter a currency code or name">
 		</div>
 		<table class="table mt-3">
@@ -49,7 +53,7 @@
 			</tbody>
 		</table>
 	</div>
-    
+
 	<script src="./index.js"></script>
 </body>
 </html>
