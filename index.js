@@ -2,7 +2,7 @@
 fetch('https://api.coinbase.com/v2/currencies')
 .then(response => response.json())
 .then(obj => {
-    // Get the currency list and search input elements
+    
     const currencyList = document.getElementById('currency-list');
     const searchInput = document.getElementById('search-input');
 
@@ -28,16 +28,29 @@ fetch('https://api.coinbase.com/v2/currencies')
     // Add event listener to search input to filter table rows
     searchInput.addEventListener('input', () => {
         const searchTerm = searchInput.value.trim().toLowerCase();
-        currencyList.querySelectorAll('tr').forEach(row => {
+        const rows = currencyList.querySelectorAll('tr');
+        let matchCount = 0;
+        rows.forEach(row => {
             const code = row.querySelector('td:first-child').textContent.toLowerCase();
             const name = row.querySelector('td:last-child').textContent.toLowerCase();
             if (code.includes(searchTerm) || name.includes(searchTerm)) {
                 row.style.display = '';
+                matchCount++;
             } else {
                 row.style.display = 'none';
             }
         });
+        if (matchCount === 0) {
+            const noMatchRow = document.createElement('tr');
+            const noMatchCell = document.createElement('td');
+            noMatchCell.textContent = 'No matching data';
+            noMatchCell.colSpan = 2;
+            noMatchRow.appendChild(noMatchCell);
+            currencyList.appendChild(noMatchRow);
+        }
     });
+    
+    
 })
 .catch(error => console.error(error));
 
